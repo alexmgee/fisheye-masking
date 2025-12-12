@@ -107,32 +107,45 @@ This guide is designed for first-time RunPod users. It implements a **Cost-Effic
         --remove "operator" "tripod" "shadow"
     ```
 
-4.  **Review (Optional)**:
-    *   You can't see the GUI easily on RunPod Web Terminal.
-    *   **Option A**: Trust the AI (it usually works well with SAM3).
-    *   **Option B**: Compress the masks and download them to review locally.
-        ```bash
-        cd /workspace/projects/my_scan
-        zip -r masks_review.zip masks/
-        ```
+## 🖼️ Phase 4: Hybrid Workflow (Download & Review)
+*Concept: RunPod has no screen. We use the "Hybrid Workflow": heavy AI on cloud, precise human editing on your Mac/PC.*
+
+1.  **Package Your Masks**:
+    *   On RunPod (Web Terminal), zip up the masks and frames.
+    *   *Tip: Zipping prevents downloading thousands of tiny files.*
+    ```bash
+    cd /workspace/projects/my_scan
+    # Zip mask folder AND frames (you need frames to see what you're masking!)
+    zip -r review_pack.zip masks/ frames/
+    ```
+
+2.  **Download to Local Machine**:
+    *   **Option A: Jupyter Lab (Easiest)**
+        *   On RunPod Dashboard, click **Connect** -> **Connect via HTTP (Port 8888)**.
+        *   Navigate to your project folder.
+        *   Right-click `review_pack.zip` -> **Download**.
+    *   **Option B: Magic fast download (scp)**
+        *   On your LOCAL terminal:
+        `scp -P [PORT] root@[IP]:/workspace/projects/my_scan/review_pack.zip ./`
+
+3.  **Local Review**:
+    *   Unzip on your computer.
+    *   Run the **Review Gallery** locally (no lag, full quality):
+    ```bash
+    # On your local machine
+    python scripts/review_gallery.py ./review_pack/masks --flagged
+    ```
+    *   *Edit, Paint, Save*.
+
+4.  **Finalize**:
+    *   Once you are happy with the masks locally, you can continue your photogrammetry pipeline (COLMAP/Splatting) locally!
+    *   **Done!** You used the cloud for the hard part (AI) and your local machine for the precise part (UI).
 
 ---
 
-## 🏁 Phase 4: Download & Cleanup
-
-1.  **Download Results**:
-    *   **From RunPod**:
-        *   In the Dashboard, file browser (if using Jupyter) or use `gdown` simply to re-upload to Drive? No, easier to use transfer.sh or just scp.
-    *   **Simplest Way (jupyter)**:
-        *   On the Pod dashboard, click **Connect** -> **Connect via HTTP (Port 8888)** to open Jupyter Lab.
-        *   Navigate files on the left.
-        *   Right-click `masks_review.zip` -> **Download**.
-
-2.  **Terminate**:
-    *   Once you have your masks downloaded locally, **Terminate** the GPU pod.
-
-3.  **Storage**:
-    *   You can keep the **Network Volume** as long as you want (it's cheap) for the next project, or delete it if you are done forever.
+## 🧹 Phase 5: Cleanup
+1.  **Terminate Pod**: Stop paying for the GPU immediately after downloading.
+2.  **Storage**: Keep the Network Volume if you want to store the raw footage for later, or delete it to stop the small storage fee.
 
 ---
 **Summary Checklist**
