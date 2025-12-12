@@ -1,0 +1,49 @@
+# Data and Projects
+projects/
+data/
+outputs/
+*.mp4
+*.osv
+*.insv
+*.jpg
+*.png
+
+# Models and Checkpoints
+models/
+checkpoints/
+sam3/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.idea/
+.vscode/
+.gemini/
+
+# System
+.DS_Store
+Thumbs.db
