@@ -19,8 +19,8 @@ The easiest way to get started if you don't want to build a custom Docker image.
     Clone your repo (or upload your code) and run the setup script:
 
     ```bash
-    git clone https://github.com/your-repo/fisheye-workflow.git
-    cd fisheye-workflow
+    git clone https://github.com/alexmgee/fisheye-masking.git
+    cd fisheye-masking
     
     # Run the setup script to install SAM3 & dependencies
     bash scripts/setup_runpod.sh
